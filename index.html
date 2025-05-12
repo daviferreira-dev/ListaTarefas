@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Lista de Tarefas</h1>
+    </header>
+    <main>
+        <section class="todo-container" aria-label="Lista de tarefas">
+            <div class="filters" role="radiogroup" aria-label="Filtro de tarefas">
+                <label>
+                    <input type="radio" name="filter" value="all" checked />
+                    Todas
+                </label>
+                <label>
+                    <input type="radio" name="filter" value="completed" />
+                    Concluídas
+                </label>
+                <label>
+                    <input type="radio" name="filter" value="pending" />
+                    Pendentes
+                </label>
+            </div>
+            <ul class="todo-list" role="list" aria-live="polite" aria-relevant="additions removals">
+            </ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
