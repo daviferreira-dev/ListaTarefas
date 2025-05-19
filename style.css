@@ -115,3 +115,8 @@ ul.todo-list li input[type="checkbox"] {
         margin-right: 8px;
     }
 }
+
+#novaTarefa {
+    font-style: italic;
+    color: rgb(102, 102, 102);
+}

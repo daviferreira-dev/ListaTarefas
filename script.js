@@ -12,8 +12,8 @@
 
     let listaElementos = document.querySelector('.todo-list');
     let filtros = document.querySelectorAll('input[name="filter"]');
-    let inputNovaTarefa = document.querySelector('#novaTarefa'); // Captura o input de nova tarefa
-    let proximoId = tarefas.length + 1; // Variável para gerar IDs únicos
+    let inputNovaTarefa = document.querySelector('#novaTarefa');
+    let proximoId = tarefas.length + 1;
 
     // Retorna o filtro que está agora
     function filtroSelecionado() {
@@ -106,6 +106,16 @@
         }
     }
 
+    // Adiciona evento para remover a última tarefa ao pressionar "Backspace" com o foco no input de nova tarefa
+    function habilitarRemoverUltimaTarefa() {
+        inputNovaTarefa.addEventListener('keydown', function (event) { // Usamos 'keydown' para capturar o Backspace antes da ação padrão
+            if (event.key === 'Backspace' && inputNovaTarefa.value.trim() === '' && tarefas.length > 0) {
+                tarefas.pop(); // Remove o último elemento do array 'tarefas'
+                renderizarTarefas();
+            }
+        });
+    }
+    
     // Adiciona evento para adicionar nova tarefa ao pressionar "Enter"
     function habilitarAdicionarTarefa() {
         inputNovaTarefa.addEventListener('keypress', function (event) {
@@ -117,8 +127,8 @@
                     concluida: false
                 };
                 tarefas.push(novaTarefa);
-                inputNovaTarefa.value = ''; // Limpa o campo de input
-                renderizarTarefas(); // Renderiza a lista com a nova tarefa
+                inputNovaTarefa.value = '';
+                renderizarTarefas();
             }
         });
     }
@@ -128,6 +138,9 @@
 
     // Chama a função para habilitar a adição de tarefas
     habilitarAdicionarTarefa();
+
+    // Chama a função para habilitar a remoção da última tarefa
+    habilitarRemoverUltimaTarefa();
 
     // Chama a função renderizar tarefas inicialmente
     renderizarTarefas();
