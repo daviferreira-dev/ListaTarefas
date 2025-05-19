@@ -12,6 +12,8 @@
 
     let listaElementos = document.querySelector('.todo-list');
     let filtros = document.querySelectorAll('input[name="filter"]');
+    let inputNovaTarefa = document.querySelector('#novaTarefa'); // Captura o input de nova tarefa
+    let proximoId = tarefas.length + 1; // Variável para gerar IDs únicos
 
     // Retorna o filtro que está agora
     function filtroSelecionado() {
@@ -34,7 +36,7 @@
         renderizarTarefas();
     }
 
-    // Limpa a lista 
+    // Limpa a lista
     function limparLista() {
         while (listaElementos.firstChild) {
             listaElementos.removeChild(listaElementos.firstChild);
@@ -104,10 +106,30 @@
         }
     }
 
-    //chama a função habilitar filtros a cada interação aos estados da tarefa
+    // Adiciona evento para adicionar nova tarefa ao pressionar "Enter"
+    function habilitarAdicionarTarefa() {
+        inputNovaTarefa.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter' && inputNovaTarefa.value.trim() !== '') {
+                const novaDescricao = inputNovaTarefa.value.trim();
+                const novaTarefa = {
+                    id: proximoId++,
+                    descricao: novaDescricao,
+                    concluida: false
+                };
+                tarefas.push(novaTarefa);
+                inputNovaTarefa.value = ''; // Limpa o campo de input
+                renderizarTarefas(); // Renderiza a lista com a nova tarefa
+            }
+        });
+    }
+
+    // Chama a função habilitar filtros
     habilitarFiltros();
 
-    //chama a função renderizar tarefas a cada interação aos estados da tarefa
+    // Chama a função para habilitar a adição de tarefas
+    habilitarAdicionarTarefa();
+
+    // Chama a função renderizar tarefas inicialmente
     renderizarTarefas();
 
-})();  
+})();
